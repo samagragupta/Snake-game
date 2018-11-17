@@ -4,12 +4,14 @@ window.onload=function() {
     document.addEventListener("keydown",keyPush);
     setInterval(game,1000/15);
 }
+
 snakex=snakey=10;
 gs=tc=20;
 fruitx=fruity=15;
 speedx=speedy=0;
 trail=[];
 tail = 5;
+score = 0;
 function game() {
     snakex+=speedx;
     snakey+=speedy;
@@ -32,6 +34,7 @@ function game() {
         ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
         if(trail[i].x==snakex && trail[i].y==snakey) {
             tail = 5;
+            score = 0;
         }
     }
     trail.push({x:snakex,y:snakey});
@@ -40,11 +43,14 @@ function game() {
     }
     if(fruitx==snakex && fruity==snakey) {
         tail++;
+        score++;
         fruitx=Math.floor(Math.random()*tc);
         fruity=Math.floor(Math.random()*tc);
     }
     ctx.fillStyle="red";
     ctx.fillRect(fruitx*gs,fruity*gs,gs-2,gs-2);
+
+    document.getElementById("score").innerHTML = score
 }
 function keyPush(evt) {
     switch(evt.keyCode) {
@@ -62,3 +68,5 @@ function keyPush(evt) {
             break;
     }
 }
+
+;
